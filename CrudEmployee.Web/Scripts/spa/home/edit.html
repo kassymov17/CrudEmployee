@@ -1,0 +1,94 @@
+﻿<div id="editEmployeeWrapper">
+    <hr />
+    <div class="row" ng-if="!loadingEmployee">
+        <div class="col-xs-3">
+            <div class="text-center">
+                <img ng-src="../../Content/images/employees/{{employee.Image}}" class="avatar img-responsive" alt="avatar" />
+                <h6>Изменить фото...</h6>
+
+                <input type="file" ng-file-select="prepareFiles($files)" />
+            </div>
+        </div>
+
+        <div class="col-xs-9 personal-info">
+            <div class="alert alert-info alert-dismissable">
+                <a class="panel-close close" data-dismiss="alert">×</a>
+                <i class="fa fa-pencil-square-o"></i>
+                Редактирование <strong>{{employee.FirstName}} {{employee.LastName}}</strong> страницы. Убедитесь, что заполнили все обязательные поля.
+            </div>
+            <form class="form-horizontal" role="form" novalidate angular-validator name="editEmployeeForm" angular-validator-submit="UpdateEmployee()">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-8">
+                            <label class="control-label">Имя</label>
+                            <input class="form-control" name="firstname" type="text" ng-model="employee.FirstName"
+                                   validate-on="blur" required required-message = "'Имя обязательное поле''" />
+                        </div>
+                        <div class="col-xs-4 selectContainer">
+                            <label class="control-label">Должность</label>
+                            <select ng-model="employee.PositionId" class="form-control back" ng-options="option.Id as option.Name for option in positions" required></select>
+                            <input type="hidden" name="PositionId" ng-value="employee.PositionId" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <label class="control-label">Фамилия</label>
+                            <input class="form-control" type="text" ng-model="employee.LastName" name="lastname"
+                                   validate-on="blur" required required-message="'Фамилия обязательное поле'" />
+                        </div>
+                        <div class="col-xs-4">
+                            <label class="control-label">Отчество</label>
+                            <input class="form-control" type="text" ng-model="employee.Patronymic" name="patronymic"
+                                   validate-on="blur" required required-message="'Отчество обязательное поле'" />
+                        </div>
+                        <div class="col-xs-4">
+                            <label class="control-label">Email</label>
+                            <input class="form-control" type="email" ng-model="employee.Email" name="email" validate-on="blur" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <label class="control-label">Дата рождения</label>
+                            <p class="input-group">
+                                <input type="datetime" class="form-control" name="dateofbirth" datepicker-popup="{{format}}" ng-model="employee.DateOfBirth" is-open="datepicker.opened" datepicker-options="dateOptions" ng-required="true" datepicker-append-to-body="true" close-text="Close"
+                                       validate-on="blur" required required-message="'Дата рождения обязательное поле'" />
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="openDatePicker($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </p>
+                        </div>
+                        <div class="col-xs-6">
+                            <label class="control-label">Телефон</label>
+                            <input class="form-control" type="text" ng-model="employee.Phone" name="phone"
+                                   validate-on="blur" required required-message="'Телефон обязательное поле'" ng-pattern=""
+                                   invalid-message="'Введите валидный телефон'">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-6">
+
+                        </div>
+                        <div class="col-xs-6">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-xs-4">
+                    <label class="control-label"></label>
+                    <div class="">
+                        <input type="submit" class="btn btn-primary" value="Обновить" />
+                        <span></span>
+                        <a class="btn btn-default" ng-href="#/">Отмена</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
